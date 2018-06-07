@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,17 +11,24 @@ export class ListaTarefaPage {
   novaTarefa;
   dataatual;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.tarefas = ['comprar pão', 'ir para o trabalho', 'pagar as contas', 'jogar futebol', 'beber água'];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.tarefas = ['Estudar para o enem', 'Beber água', 'Comer direito'];
     this.dataatual = new Date();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaTarefaPage');
   }
+
   add() {
     this.tarefas.push(this.novaTarefa);
     this.novaTarefa='';
+    let alert = this.alertCtrl.create({
+    title: 'Sucesso',
+    subTitle: 'Tarefa Cadastrada com Sucesso!',
+    buttons: ['OK!']
+      });
+    alert.present();
   }
   delete(tarefa){
     var i = this.tarefas.indexOf(tarefa);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,7 @@ export class ListaCompraPage {
   novaCompra;
   dataatual;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.compras = ['Arroz', 'Feijão'];
     this.dataatual = new Date();
   }
@@ -22,6 +22,12 @@ export class ListaCompraPage {
   add() {
     this.compras.push(this.novaCompra);
     this.novaCompra='';
+    let alert = this.alertCtrl.create({
+    title: 'Sucesso',
+    subTitle: 'Compra Cadastrada com Sucesso!',
+    buttons: ['OK!']
+      });
+    alert.present();
   }
   delete(compra){
     var i = this.compras.indexOf(compra);
