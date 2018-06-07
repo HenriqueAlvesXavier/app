@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,7 @@ export class ListaCompraPage {
   novaCompra;
   dataatual;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController) {
     this.compras = ['Arroz', 'Feijão'];
     this.dataatual = new Date();
   }
@@ -20,14 +20,12 @@ export class ListaCompraPage {
     console.log('ionViewDidLoad ListaCompraPage');
   }
   add() {
-    this.compras.push(this.novaCompra);
-    this.novaCompra='';
-    let alert = this.alertCtrl.create({
-    title: 'Sucesso',
-    subTitle: 'Compra Cadastrada com Sucesso!',
-    buttons: ['OK!']
-      });
-    alert.present();
+    let toast = this.toastCtrl.create({
+    message: 'Compra cadastrada com sucesso!',
+    duration: 1500,
+    position: 'top'
+  });
+    toast.present();
   }
   delete(compra){
     let alert = this.alertCtrl.create({
