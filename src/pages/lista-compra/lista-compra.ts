@@ -42,6 +42,12 @@ export class ListaCompraPage {
           handler: () => {
             var i = this.compras.indexOf(compra);
             this.compras.splice(i, 1);
+            let toast = this.toastCtrl.create({
+            message: 'Compra excluída com sucesso!',
+            duration: 1500,
+            position: 'top'
+          });
+            toast.present();
           }
         }
       ]
