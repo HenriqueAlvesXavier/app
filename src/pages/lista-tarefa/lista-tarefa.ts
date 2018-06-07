@@ -30,8 +30,26 @@ export class ListaTarefaPage {
       });
     alert.present();
   }
-  delete(tarefa){
-    var i = this.tarefas.indexOf(tarefa);
-    this.tarefas.splice(i, 1);
+
+  delete(tarefa) {
+    let alert = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: 'Deseja excluir essa tarefa?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            var i = this.tarefas.indexOf(tarefa);
+            this.tarefas.splice(i, 1);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

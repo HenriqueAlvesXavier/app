@@ -31,22 +31,23 @@ export class ListaCompraPage {
   }
   delete(compra){
     let alert = this.alertCtrl.create({
-    title: 'Confirmação',
-    message: 'Deseja excluir essa compra?',
-    buttons: [
-      {
-        text: 'Não',
-        handler: () => {
+      title: 'Confirmação',
+      message: 'Deseja excluir essa compra?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            var i = this.compras.indexOf(compra);
+            this.compras.splice(i, 1);
+          }
         }
-      },
-      {
-        text: 'Sim',
-        handler: () => {
-          var i = this.compras.indexOf(compra);
-          this.compras.splice(i, 1);
-        }
-      }
-    ]
-  });
-  alert.present();
+      ]
+    });
+    alert.present();
+    }
   }
