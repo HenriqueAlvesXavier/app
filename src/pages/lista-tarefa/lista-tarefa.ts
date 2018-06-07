@@ -44,6 +44,12 @@ export class ListaTarefaPage {
           handler: () => {
             var i = this.tarefas.indexOf(tarefa);
             this.tarefas.splice(i, 1);
+            let toast = this.toastCtrl.create({
+            message: 'Tarefa excluída com sucesso!',
+            duration: 1500,
+            position: 'top'
+          });
+            toast.present();
           }
         }
       ]
