@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,8 @@ export class ListaTarefaPage {
   novaTarefa;
   dataatual;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.tarefas = ['Estudar para o enem', 'Beber água', 'Comer direito'];
     this.dataatual = new Date();
   }
@@ -21,12 +22,23 @@ export class ListaTarefaPage {
   }
 
   add() {
-    let toast = this.toastCtrl.create({
-    message: 'Tarefa cadastrada com sucesso!',
-    duration: 1500,
-    position: 'top'
+    let loading = this.loadingCtrl.create({
+    content: 'Processando...'
   });
-    toast.present();
+
+  loading.present();
+
+  setTimeout(() => {
+    this.tarefas.push(this.novaTarefa);
+    this.novaTarefa='';
+    let toast = this.toastCtrl.create({
+      message: 'Tarefa cadastrada com sucesso!',
+      duration: 1500,
+      position: 'bottom'
+      });
+      toast.present();
+      loading.dismiss();
+  }, 5000);
   }
 
   delete(tarefa) {
@@ -45,10 +57,10 @@ export class ListaTarefaPage {
             var i = this.tarefas.indexOf(tarefa);
             this.tarefas.splice(i, 1);
             let toast = this.toastCtrl.create({
-            message: 'Tarefa excluída com sucesso!',
-            duration: 1500,
-            position: 'top'
-          });
+              message: 'Tarefa excluída com sucesso!',
+              duration: 1500,
+              position: 'bottom'
+            });
             toast.present();
           }
         }

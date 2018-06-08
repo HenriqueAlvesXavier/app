@@ -19,14 +19,18 @@ export class ListaCompraPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaCompraPage');
   }
+
+  
   add() {
     let toast = this.toastCtrl.create({
     message: 'Compra cadastrada com sucesso!',
     duration: 1500,
-    position: 'top'
+    position: 'bottom'
   });
     toast.present();
   }
+
+
   delete(compra){
     let alert = this.alertCtrl.create({
       title: 'Confirmação',
@@ -45,7 +49,7 @@ export class ListaCompraPage {
             let toast = this.toastCtrl.create({
             message: 'Compra excluída com sucesso!',
             duration: 1500,
-            position: 'top'
+            position: 'bottom'
           });
             toast.present();
           }
