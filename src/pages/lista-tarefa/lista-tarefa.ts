@@ -49,6 +49,7 @@ export class ListaTarefaPage {
         {
           text: 'Não',
           handler: () => {
+            
           }
         },
         {

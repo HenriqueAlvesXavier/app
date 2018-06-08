@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,8 @@ export class ListaCompraPage {
   novaCompra;
   dataatual;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.compras = ['Arroz', 'Feijão'];
     this.dataatual = new Date();
   }
@@ -20,16 +21,26 @@ export class ListaCompraPage {
     console.log('ionViewDidLoad ListaCompraPage');
   }
 
-  
-  add() {
-    let toast = this.toastCtrl.create({
-    message: 'Compra cadastrada com sucesso!',
-    duration: 1500,
-    position: 'bottom'
-  });
-    toast.present();
-  }
 
+  add() {
+    let loading = this.loadingCtrl.create({
+    content: 'Processando...'
+  });
+
+  loading.present();
+
+  setTimeout(() => {
+    this.compras.push(this.novaCompra);
+    this.novaCompra='';
+    let toast = this.toastCtrl.create({
+      message: 'Compra cadastrada com sucesso!',
+      duration: 1500,
+      position: 'bottom'
+      });
+      toast.present();
+      loading.dismiss();
+  }, 5000);
+  }
 
   delete(compra){
     let alert = this.alertCtrl.create({
