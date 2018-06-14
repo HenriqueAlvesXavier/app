@@ -11,8 +11,8 @@ export class ListaTarefaPage {
   novaTarefa;
   dataatual;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController) {
     this.tarefas = ['Estudar para o enem', 'Beber água', 'Comer direito'];
     this.dataatual = new Date();
   }
@@ -22,23 +22,27 @@ export class ListaTarefaPage {
   }
 
   add() {
+    //Cria e exibe o loader
     let loading = this.loadingCtrl.create({
-    content: 'Processando...'
-  });
+      content: 'Processando...'
+    });
+    loading.present();
 
-  loading.present();
-
-  setTimeout(() => {
+    //\Realiza a atividade solicitada
     this.tarefas.push(this.novaTarefa);
     this.novaTarefa='';
-    let toast = this.toastCtrl.create({
-      message: 'Tarefa cadastrada com sucesso!',
-      duration: 1500,
-      position: 'bottom'
-      });
-      toast.present();
-      loading.dismiss();
-  }, 5000);
+
+    //Após o tempo configurado, exibe o toast de sucesso e finaliza o loader
+    setTimeout(() => {
+      let toast = this.toastCtrl.create({
+        message: 'Tarefa cadastrada com sucesso!',
+        duration: 1500,
+        position: 'bottom'
+        });
+        toast.present();
+        loading.dismiss();
+    }, 5000);
+
   }
 
   delete(tarefa) {
@@ -49,7 +53,7 @@ export class ListaTarefaPage {
         {
           text: 'Não',
           handler: () => {
-            
+
           }
         },
         {
