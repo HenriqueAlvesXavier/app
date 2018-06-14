@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ListaTarefaPage } from '../pages/lista-tarefa/lista-tarefa';
 import { ListaCompraPage } from '../pages/lista-compra/lista-compra';
+import { NovaTarefaPage } from '../pages/nova-tarefa/nova-tarefa';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -14,7 +15,8 @@ import { HomePage } from '../pages/home/home';
     MyApp,
     HomePage,
     ListaTarefaPage,
-    ListaCompraPage
+    ListaCompraPage,
+    NovaTarefaPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { HomePage } from '../pages/home/home';
     MyApp,
     HomePage,
     ListaTarefaPage,
-    ListaCompraPage
+    ListaCompraPage,
+    NovaTarefaPage
   ],
   providers: [
     StatusBar,

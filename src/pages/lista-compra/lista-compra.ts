@@ -39,9 +39,8 @@ export class ListaCompraPage {
       });
       toast.present();
       loading.dismiss();
-  }, 5000);
+  }, 1500);
   }
-
   delete(compra){
     let alert = this.alertCtrl.create({
       title: 'Confirmação',
@@ -50,33 +49,27 @@ export class ListaCompraPage {
         {
           text: 'Não',
           handler: () => {
-
           }
         },
         {
           text: 'Sim',
           handler: () => {
-
             let loading = this.loadingCtrl.create({
               content: 'Excluindo...'
             });
-
             loading.present();
-
-            var i = this.compras.indexOf(compra);
-            this.compras.splice(i, 1);
-
-            let toast = this.toastCtrl.create({
-              message: 'Compra excluída com sucesso',
-              duration: 5000,
-              position: 'bottom'
-            });
-
-            toast.present();
-
-            loading.dismiss();
+            setTimeout(() => {
+              var i = this.compras.indexOf(compra);
+              this.compras.splice(i, 1);
+              let toast = this.toastCtrl.create({
+                message: 'Compra excluída com sucesso',
+                duration: 5000,
+                position: 'bottom'
+              });
+              toast.present();
+              loading.dismiss();
+            }, 1500);
           }
-
         }
       ]
     });
