@@ -37,7 +37,7 @@ export class ListaTarefaPage {
       let toast = this.toastCtrl.create({
         message: 'Tarefa cadastrada com sucesso!',
         duration: 1500,
-        position: 'top'
+        position: 'bottom'
         });
         toast.present();
         loading.dismiss();
@@ -45,7 +45,7 @@ export class ListaTarefaPage {
 
   }
 
-  delete(tarefa) {
+  delete(tarefa){
     let alert = this.alertCtrl.create({
       title: 'Confirmação',
       message: 'Deseja excluir essa tarefa?',
@@ -59,15 +59,27 @@ export class ListaTarefaPage {
         {
           text: 'Sim',
           handler: () => {
+
+            let loading = this.loadingCtrl.create({
+              content: 'Excluindo...'
+            });
+
+            loading.present();
+
             var i = this.tarefas.indexOf(tarefa);
             this.tarefas.splice(i, 1);
+
             let toast = this.toastCtrl.create({
-              message: 'Tarefa excluída com sucesso!',
-              duration: 1500,
+              message: 'Tarefa excluída com sucesso',
+              duration: 5000,
               position: 'bottom'
             });
+
             toast.present();
+
+            loading.dismiss();
           }
+
         }
       ]
     });
