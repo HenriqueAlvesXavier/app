@@ -37,7 +37,7 @@ export class ListaTarefaPage {
       let toast = this.toastCtrl.create({
         message: 'Tarefa cadastrada com sucesso!',
         duration: 1500,
-        position: 'bottom'
+        position: 'top'
         });
         toast.present();
         loading.dismiss();
