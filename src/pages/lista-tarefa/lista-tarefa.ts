@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController, ModalController } from 'ionic-angular';
-import {NovaTarefaPage} from '../nova-tarefa/nova-tarefa';
+import { NovaTarefaPage } from '../nova-tarefa/nova-tarefa';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -8,46 +9,45 @@ import {NovaTarefaPage} from '../nova-tarefa/nova-tarefa';
   templateUrl: 'lista-tarefa.html',
 })
 export class ListaTarefaPage {
-  tarefas;
+  tarefas = [];
   dataatual;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController, public ModalCtrl: ModalController) {
-    this.tarefas = ['Estudar para o enem', 'Beber água', 'Comer direito'];
-    this.dataatual = new Date();
-  }
+    public loadingCtrl: LoadingController, public ModalCtrl: ModalController, public storage: Storage) {
+      this.tarefas = [];
+      this.storage.get('tarefas').then((val) => {
+        this.tarefas = val;
+      });
+      this.dataatual = new Date();
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaTarefaPage');
-  }
-  novatarefa(){
-    let modal = this.ModalCtrl.create(NovaTarefaPage, {});
-    modal.onDidDismiss(data => {
-      this.add(data.novaTarefa);
-    })
-    modal.present();
-  }
 
-  add(novaTarefa) {
-    //Cria e exibe o loader
-    let loading = this.loadingCtrl.create({
+    novatarefa(){
+      let modal = this.ModalCtrl.create(NovaTarefaPage, {});
+      modal.onDidDismiss(data => {
+        this.add(data.novaTarefa);
+      })
+      modal.present();
+    }
+
+    add(novaTarefa) {
+      //Cria e exibe o loader
+      let loading = this.loadingCtrl.create({
       content: 'Processando...'
     });
     loading.present();
 
     //\Realiza a atividade solicitada
     this.tarefas.push(novaTarefa);
-
-    //Após o tempo configurado, exibe o toast de sucesso e finaliza o loader
-    setTimeout(() => {
+    this.storage.set('tarefas', this.tarefas).then(() => {
       let toast = this.toastCtrl.create({
         message: 'Tarefa cadastrada com sucesso!',
         duration: 1500,
         position: 'bottom'
-        });
-        toast.present();
-        loading.dismiss();
-    }, 1500);
+      });
+      toast.present();
+      loading.dismiss();
+    });
 
   }
 
@@ -71,10 +71,11 @@ export class ListaTarefaPage {
             });
 
             loading.present();
-            setTimeout(() => {
-              var i = this.tarefas.indexOf(tarefa);
-              this.tarefas.splice(i, 1);
 
+            var i = this.tarefas.indexOf(tarefa);
+            this.tarefas.splice(i, 1);
+
+            this.storage.set('tarefas', this.tarefas).then(() => {
               let toast = this.toastCtrl.create({
                 message: 'Tarefa excluída com sucesso',
                 duration: 5000,
@@ -82,11 +83,11 @@ export class ListaTarefaPage {
               });
               toast.present();
               loading.dismiss();
-            }, 1500);
+            });
           }
         }
       ]
     });
     alert.present();
   }
-}
+  }
