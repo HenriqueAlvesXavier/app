@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController, ModalController } from 'ionic-angular';
 import { NovaCompraPage } from '../nova-compra/nova-compra';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -13,14 +14,13 @@ export class ListaCompraPage {
   dataatual;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
-    this.compras = ['Celular', 'JBL'];
-    this.dataatual = new Date();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaCompraPage');
-  }
+    public loadingCtrl: LoadingController, public modalCtrl: ModalController, public storage: Storage) {
+      this.compras = [];
+      this.storage.get('compras').then((val) => {
+        this.compras = val;
+      });
+      this.dataatual = new Date();
+    }
 
   novacompra(){
     let modal = this.modalCtrl.create("NovaCompraPage", {});
@@ -39,9 +39,7 @@ export class ListaCompraPage {
 
     //\Realiza a atividade solicitada
     this.compras.push(novaCompra);
-
-    //Após o tempo configurado, exibe o toast de sucesso e finaliza o loader
-    setTimeout(() => {
+    this.storage.set('compras', this.compras).then(() => {
       let toast = this.toastCtrl.create({
         message: 'Compra cadastrada com sucesso!',
         duration: 1500,
@@ -49,7 +47,7 @@ export class ListaCompraPage {
         });
         toast.present();
         loading.dismiss();
-    }, 1500);
+    });
 
   }
 
@@ -73,10 +71,10 @@ export class ListaCompraPage {
             });
 
             loading.present();
-            setTimeout(() => {
               var i = this.compras.indexOf(compra);
               this.compras.splice(i, 1);
 
+              this.storage.set('compras', this.compras).then(() => {
               let toast = this.toastCtrl.create({
                 message: 'Compra excluída com sucesso',
                 duration: 5000,
@@ -84,7 +82,7 @@ export class ListaCompraPage {
               });
               toast.present();
               loading.dismiss();
-            }, 1500);
+            });
           }
         }
       ]

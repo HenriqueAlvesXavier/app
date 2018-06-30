@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'lista-tarefa.html',
 })
 export class ListaTarefaPage {
-  tarefas = [];
+  tarefas;
   dataatual;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController,
