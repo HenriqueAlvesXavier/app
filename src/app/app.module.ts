@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { ListaTarefaPage } from '../pages/lista-tarefa/lista-tarefa';
 import { ListaCompraPage } from '../pages/lista-compra/lista-compra';
 import { NovaTarefaPage } from '../pages/nova-tarefa/nova-tarefa';
+import { PerfilPage } from '../pages/perfil/perfil';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -18,7 +19,8 @@ import { HomePage } from '../pages/home/home';
     HomePage,
     ListaTarefaPage,
     ListaCompraPage,
-    NovaTarefaPage
+    NovaTarefaPage,
+    PerfilPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { HomePage } from '../pages/home/home';
     HomePage,
     ListaTarefaPage,
     ListaCompraPage,
-    NovaTarefaPage
+    NovaTarefaPage,
+    PerfilPage
   ],
   providers: [
     StatusBar,

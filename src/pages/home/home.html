@@ -1,9 +1,14 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar class="home">
     <ion-title>
-      Home
+      Olá, {{usuario.nome}}
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="exibirPerfil()">
+          <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -11,31 +16,31 @@
 
 <ion-content padding>
   <ion-card class="cards-list-demo">
-  <ion-card-header>
-    Serviços
-  </ion-card-header>
+    <ion-card-header>
+      Serviços
+    </ion-card-header>
 
-  <ion-list>
-    <button ion-item (click)="exibirLista()">
-      <ion-icon name="md-list" item-start></ion-icon>
-      Lista de Tarefas
-    </button>
+    <ion-list>
+      <button ion-item (click)="exibirLista()">
+        <ion-icon name="md-list" item-start></ion-icon>
+        Lista de Tarefas
+      </button>
 
-    <button ion-item (click)="exibirCompra()">
+      <button ion-item (click)="exibirCompra()">
         <ion-icon name="md-basket" item-start></ion-icon>
         Lista de Compras
-    </button>
+      </button>
 
-    <button ion-item>
-      <ion-icon name="logo-usd" item-start></ion-icon>
-      Gestão de Contas
-    </button>
+      <button ion-item (click)="exibirConta">
+        <ion-icon name="logo-usd" item-start></ion-icon>
+        Gestão de Contas
+      </button>
 
-    <button ion-item>
-      <ion-icon name="md-contacts" item-start></ion-icon>
-      Contatinhos
-    </button>
+      <button ion-item>
+        <ion-icon name="md-contacts" item-start></ion-icon>
+        Contatos
+      </button>
 
-  </ion-list>
-</ion-card>
+    </ion-list>
+  </ion-card>
 </ion-content>

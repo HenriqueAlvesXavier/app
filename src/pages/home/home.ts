@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ListaTarefaPage} from '../lista-tarefa/lista-tarefa'
-import { ListaCompraPage} from '../lista-compra/lista-compra'
+import { ListaTarefaPage} from '../lista-tarefa/lista-tarefa';
+import { ListaCompraPage} from '../lista-compra/lista-compra';
+import { PerfilPage } from '../perfil/perfil';
+import { Storage } from '@ionic/storage';
+
 
 
 @Component({
@@ -10,7 +13,25 @@ import { ListaCompraPage} from '../lista-compra/lista-compra'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  usuario;
+
+  constructor(public navCtrl: NavController, public storage: Storage) {
+    this.usuario = {
+      'nome':'',
+      'img':''
+    }
+
+    this.storage.get('usuario').then((val) => {
+      if(!val){
+        this.navCtrl.push(PerfilPage)
+      }else{
+        this.usuario = val;
+      }
+
+    });
+  }
+  exibirPerfil() {
+    this.navCtrl.push(PerfilPage);
   }
   exibirLista() {
     this.navCtrl.push(ListaTarefaPage);
@@ -19,4 +40,5 @@ export class HomePage {
   exibirCompra() {
     this.navCtrl.push(ListaCompraPage);
   }
+
 }
