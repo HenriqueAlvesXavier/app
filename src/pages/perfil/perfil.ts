@@ -18,8 +18,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class PerfilPage {
   options: CameraOptions = {
-  quality: 10,
+  quality: 50,
   correctOrientation: true,
+  allowEdit: true,
+  saveToPhotoAlbum: true,
   destinationType: this.camera.DestinationType.DATA_URL,
   encodingType: this.camera.EncodingType.JPEG,
   mediaType: this.camera.MediaType.PICTURE
