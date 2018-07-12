@@ -22,6 +22,11 @@
       </ion-item>
 
       <ion-item>
+        <img [src]="usuario.avatar" *ngIf="usuario.avatar"/>
+        <button ion-button full (click)="Tirarfoto()">Retrato</button>
+      </ion-item>
+
+      <ion-item>
         <button ion-button full (click)="cadastro()">OK</button>
       </ion-item>
 
