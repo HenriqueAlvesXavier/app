@@ -5,11 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+import {HttpModule } from '@angular/http';
 
 import { ListaTarefaPage } from '../pages/lista-tarefa/lista-tarefa';
 import { ListaCompraPage } from '../pages/lista-compra/lista-compra';
 import { NovaTarefaPage } from '../pages/nova-tarefa/nova-tarefa';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { ListaEventoPage } from '../pages/lista-evento/lista-evento';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -21,9 +24,11 @@ import { HomePage } from '../pages/home/home';
     ListaTarefaPage,
     ListaCompraPage,
     NovaTarefaPage,
-    PerfilPage
+    PerfilPage,
+    ListaEventoPage
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
@@ -35,7 +40,8 @@ import { HomePage } from '../pages/home/home';
     ListaTarefaPage,
     ListaCompraPage,
     NovaTarefaPage,
-    PerfilPage
+    PerfilPage,
+    ListaEventoPage
   ],
   providers: [
     StatusBar,
